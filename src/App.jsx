@@ -7,13 +7,31 @@ function App() {
   const [heading, setHeading] = useState('');
   const [tasks, setTasks] = useState([]);
 
+  // Fetch tasks from localStorage on component mount
   useEffect(() => {
-    // You can add side effects or data fetching logic here
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    // localStorage.getItem('tasks') retrieves the value associated with
+    //  the key 'tasks' from the browser's local storage.
+    if (storedTasks) {
+      setTasks(storedTasks);
+    }
   }, []);
+
+  // Save tasks to localStorage whenever the task list changes
+  useEffect(() => {
+    if (tasks.length > 0) {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  }, [tasks]);
 
   const handleAddTask = () => {
     if (heading.trim() !== "") {
-      setTasks([...tasks, heading]);
+      const newTasks = [...tasks, heading];
+      // Here, a new array newTasks is 
+      // created by combining the current 
+      // list of tasks (which is stored in the tasks state)
+      //  with the new task (heading).
+      setTasks(newTasks);
       setHeading('');
     }
   };

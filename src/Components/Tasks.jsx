@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 
 
 const Tasks = ({ tasks }) => {
   
   const [checkedTasks, setCheckedTasks] = useState([]);
+  
 
   // Function that toggles whether a task at a given index is checked or not
   const ticked = (index) => {
