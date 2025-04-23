@@ -41,7 +41,7 @@ function App() {
   return (
     <>
       {/* Navbar Component */}
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Main title */}
       <h1 className="text-4xl font-bold text-center text-gray-800 py-6">
