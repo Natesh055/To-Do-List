@@ -1,65 +1,63 @@
-import { useState } from "react"; // Importing the useState hook from React to manage component state
-import "./App.css"; // Importing the stylesheet to style the app
-import Navbar from "./Components/Navbar"; // Importing the Navbar component
-import Tasks from "./Components/Tasks"; // Importing the Tasks component
+import { useEffect, useState } from "react";
+import "./App.css";
+import Navbar from "./Components/Navbar";
+import Tasks from "./Components/Tasks";
 
-// Main functional component for the App
 function App() {
-  // useState hooks to manage the state of the input field and task list
-  const [heading, setHeading] = useState(''); // 'heading' stores the task input text, 'setHeading' is used to update it
-  const [tasks, setTasks] = useState([]);  // 'tasks' stores the array of tasks, 'setTasks' is used to update it
+  const [heading, setHeading] = useState('');
+  const [tasks, setTasks] = useState([]);
 
-  // Function to handle adding a new task to the tasks list
+  useEffect(() => {
+    // You can add side effects or data fetching logic here
+  }, []);
+
   const handleAddTask = () => {
-    // Check if the input field is not empty
     if (heading.trim() !== "") {
-      // Add the new task to the existing list of tasks and update the tasks state
-      setTasks([...tasks, heading]); 
-      // Clear the input field after adding the task
-      setHeading('');  
+      setTasks([...tasks, heading]);
+      setHeading('');
     }
   };
 
-  // Getting the current date to display in the format 'YYYY-MM-DD'
   const date = new Date();
-  
+
   return (
     <>
       {/* Navbar Component */}
       <Navbar />
 
-      {/* Main title for the app */}
-      <h1 className="text-4xl" style={{ textAlign: "center" }}>
+      {/* Main title */}
+      <h1 className="text-4xl font-bold text-center text-gray-800 py-6">
         To Do List
       </h1>
 
-      {/* Displaying the current date */}
-      <h1 className="text-center mt-2">{date.toISOString().slice(0, 10)}</h1>
+      {/* Current date */}
+      <h2 className="text-center text-lg text-gray-500 mb-6">
+        {date.toISOString().slice(0, 10)}
+      </h2>
 
-      {/* Section for adding a new task */}
-      <div className="flex justify-center mt-5 gap-2">
-        {/* Label for the input field */}
-        <h2>Add a task</h2>
-        
-        {/* Input field to enter the task */}
+      {/* Add task section */}
+      <div className="flex justify-center gap-4 items-center mb-6">
+        <h2 className="text-xl font-medium text-gray-700">Add a task</h2>
+
+        {/* Input field */}
         <input
-          className="bg-red-200" // Some styling for the input field
-          type="text" // This is a text input
-          value={heading} // This binds the input value to the 'heading' state, so it will update as you type
-          onChange={(e) => setHeading(e.target.value)} // Updates the 'heading' state whenever the user types
+          className="p-3 text-lg rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          type="text"
+          value={heading}
+          onChange={(e) => setHeading(e.target.value)}
         />
-        
-        {/* Button to add the task */}
+
+        {/* Add task button */}
         <button
-          className="rounded-xl bg-blue-500" // Button styling
-          onClick={handleAddTask} // Calls the handleAddTask function when the button is clicked
+          className="p-3 text-xl text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          onClick={handleAddTask}
         >
           +
         </button>
       </div>
 
-      {/* Pass the tasks to the Tasks component */}
-      <Tasks tasks={tasks} /> {/* Passing the tasks state as a prop to the Tasks component */}
+      {/* Tasks List */}
+      <Tasks tasks={tasks} />
     </>
   );
 }
