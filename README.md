@@ -23,10 +23,19 @@ To run the To-Do List app locally:
 
 
 2. Navigate to the project folder:
-    cd todo-list
+    cd To-Do-List
 
 
-3. Open `index.html` in your browser.
+3. Open with terminal 
+
+4. Install require packages using 
+    npm install 
+
+5. After the packages have been installed run
+    npm run dev
+
+6. Enjoy the web application
+
 
 ## Usage
 1. **Add Tasks**: Type your task in the input field and click the "Add Task" button.
